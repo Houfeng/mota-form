@@ -1,0 +1,121 @@
+.mota-form {
+  @unit: 2px;
+  @fontSize: @unit * 7;
+  @duration: .3s;
+  @padding: @unit * 4;
+
+  position: relative;
+  background: #fff;
+  max-width: @unit * 400;
+  margin: auto;
+  border-radius: @unit;
+  padding: @padding * 3;
+
+  &,
+  & * {
+    box-sizing: border-box;
+    font-family: PingFang SC, Lantinghei SC, Helvetica Neue, Helvetica, Arial, Microsoft YaHei, "\5FAE\8F6F\96C5\9ED1", STHeitiSC-Light, simsun, "\5B8B\4F53", WenQuanYi Zen Hei, WenQuanYi Micro Hei, "sans-serif";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  &-inner {
+    margin: 0 - @padding;
+  }
+
+  &-item {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    padding: @padding;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &-block {
+    display: block;
+  }
+
+  &-label {
+    cursor: default;
+    font-size: @fontSize;
+    color: rgba(0, 0, 0, 0.6);
+    height: @unit * 12;
+    line-height: @unit * 12;
+    transition: all @duration;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-item:hover {
+    .mota-form-label {
+      color: rgba(0, 0, 0, 0.8);
+    }
+  }
+
+  &-control {
+    &>* {
+      width: 100%;
+    }
+
+    &>input,
+    &>select,
+    &>textarea,
+    &>button {
+      outline: 0;
+      font-size: @fontSize;
+      transition: all @duration;
+      border: 1px solid #d9d9d9;
+      background: #fff;
+      -webkit-appearance: none;
+      -ms-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: @unit;
+
+      height: @unit * 16;
+      line-height: @unit * 16;
+      padding: 0 @unit * 4;
+
+      &:focus {
+        border-color: #40a9ff;
+        box-shadow: 0 0 0 @unit rgba(24, 144, 255, 0.2);
+      }
+
+      &[data-state="0"] {
+        border-color: #f5222d;
+
+        &:focus {
+          box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
+        }
+      }
+    }
+
+    &>button,
+    &>input[type="button"],
+    &>input[type="submit"] {
+      width: auto;
+      cursor: pointer;
+      padding: 0 @unit * 8;
+
+      &:hover {
+        background: rgba(0, 0, 0, .05);
+      }
+    }
+
+  }
+
+  &-tip {
+    word-wrap: break-word;
+    word-break: normal;
+    min-height: @unit * 10;
+    line-height: @unit * 10;
+    font-size: @unit * 6;
+    color: rgba(0, 0, 0, 0.45);
+
+    &[data-state="0"] {
+      color: #f5222d;
+    }
+  }
+
+}

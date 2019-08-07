@@ -1,0 +1,65 @@
+init:
+  - name: pkginfo
+
+dev:
+  - name: clean
+  - name: typescript
+  - name: webpack
+    common:
+      disabled: true
+    entry: ./src/example/*.tsx
+    template: ./assets/*.html
+    watch: true
+  - name: server
+    port: 7007
+  - name: browser-sync
+
+build:
+  - name: clean
+  - name: typescript
+  - name: webpack
+    common:
+      disabled: true
+    entry: ./src/index.ts
+    folders:
+      js: ./
+    library: true
+    umd:
+      library: 'MotaValidation'
+      libraryTarget: 'umd'
+      umdNamedDefine: true
+    compress: false
+    externals:
+      react: 
+        commonjs: react
+        commonjs2: react
+        root: React
+      react-dom: 
+        commonjs: react-dom
+        commonjs2: react-dom
+        root: ReactDOM
+      mota: 
+        commonjs: mota
+        commonjs2: mota
+        root: mota        
+
+# build:
+#   - name: clean
+#   - name: shell
+#     script:
+#       - tsc --locale zh-cn -d --esModuleInterop
+
+add:
+  - name: react-component-creator
+
+test:
+  - name: clean
+  - name: tslint
+  - name: unit
+
+publish:
+  - name: shell
+    script:
+      - dn test
+      - dn build
+      - npm pu
