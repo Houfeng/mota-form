@@ -1,0 +1,113 @@
+.mota-form {
+  position: relative;
+  background: #fff;
+  max-width: 800px;
+  margin: auto;
+  border-radius: 4px;
+  padding: 24px;
+}
+.mota-form,
+.mota-form * {
+  box-sizing: border-box;
+  font-family: PingFang SC, Lantinghei SC, Helvetica Neue, Helvetica, Arial, Microsoft YaHei, "\5FAE\8F6F\96C5\9ED1", STHeitiSC-Light, simsun, "\5B8B\4F53", WenQuanYi Zen Hei, WenQuanYi Micro Hei, "sans-serif";
+  -webkit-font-smoothing: antialiased;
+}
+.mota-form-inner {
+  margin: -8px;
+  position: relative;
+}
+.mota-form-item {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  padding: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+.mota-form-block {
+  display: block;
+}
+.mota-form-label {
+  cursor: default;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  height: 24px;
+  line-height: 24px;
+  transition: all 0.3s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+}
+.mota-form-item:hover .mota-form-label {
+  color: rgba(0, 0, 0, 0.8);
+}
+.mota-form-control {
+  position: relative;
+}
+.mota-form-control > * {
+  width: 100%;
+}
+.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+.mota-form-control > select,
+.mota-form-control > textarea,
+.mota-form-control > button {
+  outline: 0;
+  font-size: 14px;
+  transition: all 0.3s;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  border-radius: 4px;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
+.mota-form-control > select:focus,
+.mota-form-control > textarea:focus,
+.mota-form-control > button:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"])[data-state="0"],
+.mota-form-control > select[data-state="0"],
+.mota-form-control > textarea[data-state="0"],
+.mota-form-control > button[data-state="0"] {
+  border-color: #f5222d;
+}
+.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"])[data-state="0"]:focus,
+.mota-form-control > select[data-state="0"]:focus,
+.mota-form-control > textarea[data-state="0"]:focus,
+.mota-form-control > button[data-state="0"]:focus {
+  box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
+}
+.mota-form-control > button,
+.mota-form-control > input[type="button"],
+.mota-form-control > input[type="submit"] {
+  width: auto;
+  cursor: pointer;
+  padding: 0 16px;
+}
+.mota-form-control > button:hover,
+.mota-form-control > input[type="button"]:hover,
+.mota-form-control > input[type="submit"]:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.mota-form-tip {
+  position: relative;
+  word-wrap: break-word;
+  word-break: normal;
+  min-height: 20px;
+  line-height: 20px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+}
+.mota-form-tip[data-state="0"] {
+  color: #f5222d;
+}
+
+/*# sourceMappingURL=index.css.map*/

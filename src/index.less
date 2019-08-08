@@ -8,7 +8,7 @@
   background: #fff;
   max-width: @unit * 400;
   margin: auto;
-  border-radius: @unit;
+  border-radius: @unit * 2;
   padding: @padding * 3;
 
   &,
@@ -20,6 +20,7 @@
 
   &-inner {
     margin: 0 - @padding;
+    position: relative;
   }
 
   &-item {
@@ -45,6 +46,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    position: relative;
   }
 
   &-item:hover {
@@ -54,11 +56,13 @@
   }
 
   &-control {
+    position: relative;
+
     &>* {
       width: 100%;
     }
 
-    &>input,
+    &>input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
     &>select,
     &>textarea,
     &>button {
@@ -67,15 +71,14 @@
       transition: all @duration;
       border: 1px solid #d9d9d9;
       background: #fff;
+      border-radius: @unit * 2;
+      height: @unit * 16;
+      line-height: @unit * 16;
+      padding: 0 @unit * 4;
       -webkit-appearance: none;
       -ms-appearance: none;
       -moz-appearance: none;
       appearance: none;
-      border-radius: @unit;
-
-      height: @unit * 16;
-      line-height: @unit * 16;
-      padding: 0 @unit * 4;
 
       &:focus {
         border-color: #40a9ff;
@@ -106,6 +109,7 @@
   }
 
   &-tip {
+    position: relative;
     word-wrap: break-word;
     word-break: normal;
     min-height: @unit * 10;
