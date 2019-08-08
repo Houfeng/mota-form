@@ -3,7 +3,7 @@ import { cname } from "./cname";
 
 export interface ILabelProps {
   className?: string;
-  children?: React.ReactNode | React.ReactNodeArray;
+  children?: React.ReactNode;
 }
 
 export function Label(props: ILabelProps) {

@@ -42,7 +42,11 @@ build:
       mota: 
         commonjs: mota
         commonjs2: mota
-        root: mota        
+        root: mota  
+      mota-validation: 
+        commonjs: mota-validation
+        commonjs2: mota-validation
+        root: MotaValidation       
 
 # build:
 #   - name: clean

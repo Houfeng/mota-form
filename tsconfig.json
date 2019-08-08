@@ -11,6 +11,7 @@
     "emitDecoratorMetadata": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "esModuleInterop": true,
     "lib": [
       "dom",
       "es2017"

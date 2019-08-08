@@ -1,38 +1,47 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { DatePicker, Checkbox } from "antd";
-import { Form, Item } from "../";
+import { useModel } from "mota";
+import { useValidation } from "mota-validation";
+import { Form, Field } from "../";
 
 import "antd/dist/antd.css";
 
 const root = document.getElementById("root");
 
 function App() {
+  const model = useModel({ name: "Jack", email: "", comment: "" });
+  const validation = useValidation(model);
   return (
-    <Form>
-      <Item label="名称" tip="这是提示" percent={50}>
-        <input placeholder="名称" type="date" />
-      </Item>
-      <Item label="类别" percent={50}>
-        <select>
-          <option>一</option>
-        </select>
-      </Item>
-      <Item label="测试" percent={50}>
-        <input placeholder="测试" />
-      </Item>
-      <Item label="测试" percent={50}>
-        <DatePicker placeholder="测试" />
-      </Item>
-      <Item label="测试" percent={50}>
-        <input type="checkbox" placeholder="测试" />
-      </Item>
-      <Item label="测试" percent={50}>
-        <Checkbox />
-      </Item>
-      <Item label={false}>
-        <button>提交</button>
-      </Item>
+    <Form context={{ model, validation }}>
+      <Field
+        label="Name"
+        tip="Please enter your name."
+        bind="name"
+        rules={[{ test: "required", message: "You must enter a name." }]}
+        percent={50}
+      >
+        <input type="text" />
+      </Field>
+      <Field
+        label="Email"
+        tip="Please enter your email."
+        bind="email"
+        rules={[{ test: "required" }, { test: "email" }]}
+        percent={50}
+      >
+        <input type="email" />
+      </Field>
+      <Field
+        label="Comment"
+        bind="comment"
+        rules={[{ test: "required" }]}
+        percent={100}
+      >
+        <textarea />
+      </Field>
+      <Field label={false}>
+        <button>Submit</button>
+      </Field>
     </Form>
   );
 }

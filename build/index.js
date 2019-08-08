@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("react"), require("mota-validation"), require("mota"));
 	else if(typeof define === 'function' && define.amd)
-		define("MotaForm", [], factory);
+		define("MotaForm", [, , ], factory);
 	else if(typeof exports === 'object')
-		exports["MotaForm"] = factory(require("react"));
+		exports["MotaForm"] = factory(require("react"), require("mota-validation"), require("mota"));
 	else
-		root["MotaForm"] = factory(root["React"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
+		root["MotaForm"] = factory(root["React"], root["MotaValidation"], root["mota"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_17__, __WEBPACK_EXTERNAL_MODULE_14__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -86,7 +86,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var util_1 = __webpack_require__(2);
+var util_1 = __webpack_require__(3);
 function create(prefix) {
     function convert(name, addPrefix, literal) {
         if (util_1.isString(name) && name.includes(" ")) {
@@ -142,6 +142,24 @@ exports.cname = create("mota-form");
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __importStar(__webpack_require__(0));
+exports.FormContext = React.createContext(null);
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -679,7 +697,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(9);
+exports.isBuffer = __webpack_require__(10);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -723,7 +741,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(10);
+exports.inherits = __webpack_require__(11);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -848,33 +866,78 @@ function callbackify(original) {
 }
 exports.callbackify = callbackify;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var cname_1 = __webpack_require__(1);
-function Tip(props) {
-    var children = props.children, className = props.className;
-    return React.createElement("div", { className: cname_1.cname("tip", className) }, children);
-}
-exports.Tip = Tip;
-
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(5);
+"use strict";
+
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __importStar(__webpack_require__(0));
+var utils_1 = __webpack_require__(12);
+var cname_1 = __webpack_require__(1);
+var Control_1 = __webpack_require__(13);
+var Label_1 = __webpack_require__(15);
+var Tip_1 = __webpack_require__(16);
+function renderTip(props) {
+    var _a = props.tip, tip = _a === void 0 ? "" : _a, bind = props.bind, rules = props.rules;
+    return (React.createElement(Tip_1.Tip, { bind: bind, rules: rules }, tip));
+}
+exports.renderTip = renderTip;
+function renderLabel(props) {
+    var label = props.label;
+    if (label === false)
+        return null;
+    return React.createElement(Label_1.Label, null, label);
+}
+exports.renderLabel = renderLabel;
+/**
+ * 表单项组件
+ * @param props 表单项属性
+ */
+function Field(props) {
+    var children = props.children, className = props.className, style = props.style, block = props.block, bind = props.bind, rules = props.rules;
+    var width = utils_1.calcWidth(props);
+    return (React.createElement("div", { style: __assign({}, style, { width: width }), className: cname_1.cname({ field: true, block: block }, className) },
+        renderLabel(props),
+        React.createElement(Control_1.Control, { bind: bind, rules: rules }, children),
+        renderTip(props)));
+}
+exports.Field = Field;
+exports.Item = Field;
+exports.FormItem = Field;
+exports.FormField = Field;
 
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(6);
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -883,37 +946,52 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(6);
-__export(__webpack_require__(7));
-__export(__webpack_require__(11));
-__export(__webpack_require__(3));
+__webpack_require__(7);
+__export(__webpack_require__(8));
+__export(__webpack_require__(4));
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
+var React = __importStar(__webpack_require__(0));
 var cname_1 = __webpack_require__(1);
+var Context_1 = __webpack_require__(2);
+var Field_1 = __webpack_require__(4);
+/**
+ * 表单组件
+ * @param props 表单属性
+ */
 function Form(props) {
-    var children = props.children, className = props.className;
-    return (React.createElement("div", { className: cname_1.cname(null, className) },
-        React.createElement("div", { className: cname_1.cname("inner") }, children)));
+    var children = props.children, className = props.className, context = props.context;
+    return (React.createElement(Context_1.FormContext.Provider, { value: context },
+        React.createElement("div", { className: cname_1.cname(null, className) },
+            React.createElement("div", { className: cname_1.cname("inner") }, children))));
 }
 exports.Form = Form;
+Form.Item = Field_1.Field;
+Form.Field = Field_1.Field;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1103,7 +1181,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -1114,7 +1192,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -1147,94 +1225,13 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var Tip_1 = __webpack_require__(3);
-var Control_1 = __webpack_require__(12);
-var Label_1 = __webpack_require__(13);
-var utils_1 = __webpack_require__(14);
-var cname_1 = __webpack_require__(1);
-function renderTip(props) {
-    var tip = props.tip;
-    if (tip === false)
-        return null;
-    return tip ? React.createElement(Tip_1.Tip, null, tip) : null;
-}
-exports.renderTip = renderTip;
-function renderLabel(props) {
-    var label = props.label;
-    if (label === false)
-        return null;
-    return React.createElement(Label_1.Label, null, label);
-}
-exports.renderLabel = renderLabel;
-function Item(props) {
-    var children = props.children, className = props.className, style = props.style, block = props.block;
-    var width = utils_1.calcWidth(props);
-    return (React.createElement("div", { style: __assign({}, style, { width: width }), className: cname_1.cname({ item: true, block: block }, className) },
-        renderLabel(props),
-        React.createElement(Control_1.Control, null, children),
-        renderTip(props)));
-}
-exports.Item = Item;
-
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var cname_1 = __webpack_require__(1);
-function Control(props) {
-    var children = props.children, className = props.className;
-    return React.createElement("div", { className: cname_1.cname("control", className) }, children);
-}
-exports.Control = Control;
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(0);
-var cname_1 = __webpack_require__(1);
-function Label(props) {
-    var children = props.children, className = props.className;
-    return React.createElement("div", { className: cname_1.cname("label", className) }, children);
-}
-exports.Label = Label;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var util_1 = __webpack_require__(2);
+var util_1 = __webpack_require__(3);
 function safePercent(percent) {
     if (percent < 0)
         return 0;
@@ -1255,6 +1252,96 @@ function calcWidth(info) {
 }
 exports.calcWidth = calcWidth;
 
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(0));
+var mota_1 = __webpack_require__(14);
+var cname_1 = __webpack_require__(1);
+var Context_1 = __webpack_require__(2);
+function Control(props) {
+    var _a = react_1.useContext(Context_1.FormContext), validation = _a.validation, model = _a.model;
+    var Field = validation.Field;
+    var children = props.children, className = props.className, bind = props.bind, rules = props.rules;
+    return (react_1.default.createElement("div", { className: cname_1.cname("control", className) },
+        react_1.default.createElement(Field, { bind: bind, rules: rules }, mota_1.binding(react_1.cloneElement(children, { "data-bind": bind }), model, false))));
+}
+exports.Control = Control;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_14__;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __importStar(__webpack_require__(0));
+var cname_1 = __webpack_require__(1);
+function Label(props) {
+    var children = props.children, className = props.className;
+    return React.createElement("div", { className: cname_1.cname("label", className) }, children);
+}
+exports.Label = Label;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var react_1 = __importStar(__webpack_require__(0));
+var cname_1 = __webpack_require__(1);
+var mota_validation_1 = __webpack_require__(17);
+var Context_1 = __webpack_require__(2);
+function Tip(props) {
+    var validation = react_1.useContext(Context_1.FormContext).validation;
+    var Alert = validation.Alert, state = validation.state;
+    var children = props.children, className = props.className, bind = props.bind, rules = props.rules;
+    return (react_1.default.createElement("div", { className: cname_1.cname("tip", className) }, state(bind) === mota_validation_1.states.failed ? (react_1.default.createElement(Alert, { className: cname_1.cname("error"), bind: bind, rules: rules })) : (children)));
+}
+exports.Tip = Tip;
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
 
 /***/ })
 /******/ ]);

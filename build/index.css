@@ -1,7 +1,7 @@
 .mota-form {
   position: relative;
   background: #fff;
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
   border-radius: 4px;
   padding: 24px;
@@ -16,11 +16,11 @@
   margin: -8px;
   position: relative;
 }
-.mota-form-item {
+.mota-form-field {
   position: relative;
   display: inline-block;
   vertical-align: top;
-  padding: 8px;
+  padding: 0 8px;
   overflow: hidden;
   width: 100%;
 }
@@ -39,14 +39,16 @@
   white-space: nowrap;
   position: relative;
 }
-.mota-form-item:hover .mota-form-label {
+.mota-form-field:hover .mota-form-label {
   color: rgba(0, 0, 0, 0.8);
 }
 .mota-form-control {
   position: relative;
+  font-size: 0;
 }
 .mota-form-control > * {
   width: 100%;
+  font-size: initial;
 }
 .mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 .mota-form-control > select,
@@ -61,6 +63,8 @@
   height: 32px;
   line-height: 32px;
   padding: 0 8px;
+  margin: 0;
+  display: inline-block;
   -webkit-appearance: none;
   -ms-appearance: none;
   -moz-appearance: none;
@@ -85,6 +89,12 @@
 .mota-form-control > button[data-state="0"]:focus {
   box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
 }
+.mota-form-control > textarea {
+  height: 64px;
+  line-height: 1.5;
+  padding: 4px 8px;
+  resize: none;
+}
 .mota-form-control > button,
 .mota-form-control > input[type="button"],
 .mota-form-control > input[type="submit"] {
@@ -101,12 +111,15 @@
   position: relative;
   word-wrap: break-word;
   word-break: normal;
-  min-height: 20px;
+  min-height: 22px;
   line-height: 20px;
   font-size: 12px;
   color: rgba(0, 0, 0, 0.45);
 }
 .mota-form-tip[data-state="0"] {
+  color: #f5222d;
+}
+.mota-form-error {
   color: #f5222d;
 }
 
