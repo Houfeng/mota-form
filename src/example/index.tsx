@@ -15,7 +15,12 @@ function App() {
   });
   const validation = useValidation(model);
   return (
-    <Form context={{ model, validation }}>
+    <Form
+      context={{ model, validation }}
+      defaults={{
+        field: { percent: 30 }
+      }}
+    >
       <Field
         label="Name"
         tip="Please enter your name."

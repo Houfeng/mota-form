@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import { calcWidth } from "./utils";
 import { cname } from "./cname";
 import { Control } from "./Control";
+import { FormContext } from "./Context";
 import { IRule } from "mota-validation";
 import { Label } from "./Label";
 import { Tip } from "./Tip";
@@ -23,7 +24,7 @@ export interface IFieldProps {
    * 表单项提示，
    * 如果有验证错误消息时，将不会显示，而显示错误消息
    */
-  tip?: React.ReactNode;
+  tip?: React.ReactNode | boolean;
 
   /**
    * 表单组件
@@ -78,22 +79,33 @@ export function renderLabel(props: IFieldProps) {
  * @param props 表单项属性
  */
 export function Field(props: IFieldProps) {
-  const { children, className, style, block, bind, rules } = props;
-  const width = calcWidth(props);
+  const { defaults } = useContext(FormContext);
+  const fieldProps = { ...defaults.field, ...props };
+  const { children, className, style, block, bind, rules } = fieldProps;
+  const width = calcWidth(fieldProps);
+  const classNames = cname({ field: true, block }, className);
   return (
-    <div
-      style={{ ...style, width }}
-      className={cname({ field: true, block }, className)}
-    >
-      {renderLabel(props)}
+    <div className={classNames} style={{ ...style, width }}>
+      {renderLabel(fieldProps)}
       <Control bind={bind} rules={rules}>
         {children}
       </Control>
-      {renderTip(props)}
+      {renderTip(fieldProps)}
     </div>
   );
 }
 
+/**
+ * 表单项组件
+ */
 export const Item = Field;
+
+/**
+ * 表单项组件
+ */
 export const FormItem = Field;
+
+/**
+ * 表单项组件
+ */
 export const FormField = Field;

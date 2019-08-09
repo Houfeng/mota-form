@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { IRule } from "mota-validation";
 export interface IFieldProps {
     /**
@@ -15,7 +15,7 @@ export interface IFieldProps {
      * 表单项提示，
      * 如果有验证错误消息时，将不会显示，而显示错误消息
      */
-    tip?: React.ReactNode;
+    tip?: React.ReactNode | boolean;
     /**
      * 表单组件
      */
@@ -52,6 +52,15 @@ export declare function renderLabel(props: IFieldProps): JSX.Element;
  * @param props 表单项属性
  */
 export declare function Field(props: IFieldProps): JSX.Element;
+/**
+ * 表单项组件
+ */
 export declare const Item: typeof Field;
+/**
+ * 表单项组件
+ */
 export declare const FormItem: typeof Field;
+/**
+ * 表单项组件
+ */
 export declare const FormField: typeof Field;

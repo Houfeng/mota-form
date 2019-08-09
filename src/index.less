@@ -28,7 +28,6 @@
     display: inline-block;
     vertical-align: top;
     padding: 0 @padding;
-    overflow: hidden;
     width: 100%;
   }
 
@@ -127,6 +126,7 @@
     line-height: @unit * 10;
     font-size: @unit * 6;
     color: rgba(0, 0, 0, 0.45);
+    transition: all @duration;
 
     &[data-state="0"] {
       color: #f5222d;
