@@ -900,8 +900,10 @@ var Control_1 = __webpack_require__(13);
 var Label_1 = __webpack_require__(15);
 var Tip_1 = __webpack_require__(16);
 function renderTip(props) {
-    var _a = props.tip, tip = _a === void 0 ? "" : _a, bind = props.bind, rules = props.rules;
-    return (React.createElement(Tip_1.Tip, { bind: bind, rules: rules }, tip));
+    var _a = props.tip, tip = _a === void 0 ? "" : _a, bind = props.bind;
+    if (tip === false)
+        return null;
+    return React.createElement(Tip_1.Tip, { bind: bind }, tip);
 }
 exports.renderTip = renderTip;
 function renderLabel(props) {
@@ -1316,6 +1318,17 @@ exports.Label = Label;
 
 "use strict";
 
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -1330,9 +1343,12 @@ var mota_validation_1 = __webpack_require__(17);
 var Context_1 = __webpack_require__(2);
 function Tip(props) {
     var validation = react_1.useContext(Context_1.FormContext).validation;
-    var Alert = validation.Alert, state = validation.state;
-    var children = props.children, className = props.className, bind = props.bind, rules = props.rules;
-    return (react_1.default.createElement("div", { className: cname_1.cname("tip", className) }, state(bind) === mota_validation_1.states.failed ? (react_1.default.createElement(Alert, { className: cname_1.cname("error"), bind: bind, rules: rules })) : (children)));
+    var results = validation.results;
+    var children = props.children, className = props.className, bind = props.bind;
+    var item = results && results.items && results.items[bind];
+    var _a = __assign({}, item), state = _a.state, message = _a.message;
+    var hasError = !!(state === mota_validation_1.states.failed && message);
+    return (react_1.default.createElement("div", { className: cname_1.cname({ tip: true, error: hasError }, className) }, hasError ? message : children));
 }
 exports.Tip = Tip;
 

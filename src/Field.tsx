@@ -62,12 +62,9 @@ export interface IFieldProps {
 }
 
 export function renderTip(props: IFieldProps) {
-  const { tip = "", bind, rules } = props;
-  return (
-    <Tip bind={bind} rules={rules}>
-      {tip}
-    </Tip>
-  );
+  const { tip = "", bind } = props;
+  if (tip === false) return null;
+  return <Tip bind={bind}>{tip}</Tip>;
 }
 
 export function renderLabel(props: IFieldProps) {

@@ -12,15 +12,14 @@ export interface ITipProps {
 
 export function Tip(props: ITipProps) {
   const { validation } = useContext(FormContext);
-  const { Alert, state } = validation;
-  const { children, className, bind, rules } = props;
+  const { results } = validation;
+  const { children, className, bind } = props;
+  const item = results && results.items && results.items[bind];
+  const { state, message } = { ...item };
+  const hasError = !!(state === states.failed && message);
   return (
-    <div className={cname("tip", className)}>
-      {state(bind) === states.failed ? (
-        <Alert className={cname("error")} bind={bind} rules={rules} />
-      ) : (
-        children
-      )}
+    <div className={cname({ tip: true, error: hasError }, className)}>
+      {hasError ? message : children}
     </div>
   );
 }

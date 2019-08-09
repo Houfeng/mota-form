@@ -4,12 +4,15 @@ import { useModel } from "mota";
 import { useValidation } from "mota-validation";
 import { Form, Field } from "../";
 
-import "antd/dist/antd.css";
-
 const root = document.getElementById("root");
 
 function App() {
-  const model = useModel({ name: "Jack", email: "", comment: "" });
+  const model = useModel({
+    name: "Jack",
+    email: "",
+    title: "",
+    comment: ""
+  });
   const validation = useValidation(model);
   return (
     <Form context={{ model, validation }}>
@@ -32,14 +35,24 @@ function App() {
         <input type="email" />
       </Field>
       <Field
+        label="Title"
+        tip="Please enter comment title."
+        bind="title"
+        rules={[{ test: "required" }]}
+        percent={100}
+      >
+        <input type="text" />
+      </Field>
+      <Field
         label="Comment"
+        tip="Please enter comment content."
         bind="comment"
         rules={[{ test: "required" }]}
         percent={100}
       >
         <textarea />
       </Field>
-      <Field label={false}>
+      <Field tip={false}>
         <button>Submit</button>
       </Field>
     </Form>
