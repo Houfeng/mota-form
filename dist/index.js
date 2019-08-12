@@ -7,7 +7,7 @@
 		exports["MotaForm"] = factory(require("react"), require("mota"), require("mota-validation"));
 	else
 		root["MotaForm"] = factory(root["React"], root["mota"], root["MotaValidation"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_16__, __WEBPACK_EXTERNAL_MODULE_17__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_8__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -700,7 +700,7 @@ function isPrimitive(arg) {
 }
 exports.isPrimitive = isPrimitive;
 
-exports.isBuffer = __webpack_require__(13);
+exports.isBuffer = __webpack_require__(15);
 
 function objectToString(o) {
   return Object.prototype.toString.call(o);
@@ -744,7 +744,7 @@ exports.log = function() {
  *     prototype.
  * @param {function} superCtor Constructor function to inherit prototype from.
  */
-exports.inherits = __webpack_require__(14);
+exports.inherits = __webpack_require__(16);
 
 exports._extend = function(origin, add) {
   // Don't do anything if add isn't an object
@@ -869,7 +869,7 @@ function callbackify(original) {
 }
 exports.callbackify = callbackify;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(14)))
 
 /***/ }),
 /* 4 */
@@ -897,40 +897,53 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(0));
-var utils_1 = __webpack_require__(15);
+var utils_1 = __webpack_require__(17);
 var cname_1 = __webpack_require__(1);
 var Control_1 = __webpack_require__(5);
 var Context_1 = __webpack_require__(2);
-var Label_1 = __webpack_require__(6);
-var Tip_1 = __webpack_require__(7);
+var Label_1 = __webpack_require__(7);
+var Tip_1 = __webpack_require__(9);
 function renderTip(props) {
     var _a = props.tip, tip = _a === void 0 ? "" : _a, bind = props.bind;
     if (tip === false)
-        return null;
-    return react_1.default.createElement(Tip_1.Tip, { bind: bind }, tip);
+        return;
+    var defaults = react_1.useContext(Context_1.FormContext).defaults;
+    var bindExpr = bind || props["data-bind"];
+    return (react_1.default.createElement(Tip_1.Tip, __assign({}, defaults.tip, { bind: bindExpr }),
+        " ",
+        tip));
 }
 exports.renderTip = renderTip;
 function renderLabel(props) {
-    var label = props.label;
+    var label = props.label, rules = props.rules;
     if (label === false)
-        return null;
-    return react_1.default.createElement(Label_1.Label, null, label);
+        return;
+    var defaults = react_1.useContext(Context_1.FormContext).defaults;
+    return (react_1.default.createElement(Label_1.Label, __assign({}, defaults.label, { rules: rules }), label));
 }
 exports.renderLabel = renderLabel;
+function renderControl(props) {
+    var children = props.children, bind = props.bind, rules = props.rules;
+    if (!children)
+        return;
+    var bindExpr = bind || props["data-bind"];
+    return (react_1.default.createElement(Control_1.Control, { bind: bindExpr, rules: rules }, children));
+}
+exports.renderControl = renderControl;
 /**
  * 表单项组件
- * @param props 表单项属性
+ * @param fieldProps 表单项属性
  */
-function Field(props) {
+function Field(fieldProps) {
     var defaults = react_1.useContext(Context_1.FormContext).defaults;
-    var fieldProps = __assign({}, defaults.field, props);
-    var children = fieldProps.children, className = fieldProps.className, style = fieldProps.style, block = fieldProps.block, bind = fieldProps.bind, rules = fieldProps.rules;
-    var width = utils_1.calcWidth(fieldProps);
+    var props = __assign({}, defaults.field, fieldProps);
+    var className = props.className, style = props.style, block = props.block;
+    var width = utils_1.calcWidth(props);
     var classNames = cname_1.cname({ field: true, block: block }, className);
     return (react_1.default.createElement("div", { className: classNames, style: __assign({}, style, { width: width }) },
-        renderLabel(fieldProps),
-        react_1.default.createElement(Control_1.Control, { bind: bind, rules: rules }, children),
-        renderTip(fieldProps)));
+        renderLabel(props),
+        renderControl(props),
+        renderTip(props)));
 }
 exports.Field = Field;
 /**
@@ -973,22 +986,30 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(0));
-var mota_1 = __webpack_require__(16);
+var mota_1 = __webpack_require__(6);
 var cname_1 = __webpack_require__(1);
 var Context_1 = __webpack_require__(2);
-function Control(props) {
+function Control(controlProps) {
+    var children = controlProps.children, className = controlProps.className, bind = controlProps.bind, rules = controlProps.rules;
     var _a = react_1.useContext(Context_1.FormContext), validation = _a.validation, model = _a.model, defaults = _a.defaults;
     var Field = validation.Field;
-    var children = props.children, className = props.className, bind = props.bind, rules = props.rules;
-    var controlProps = __assign({}, defaults.control, children.props, { "data-bind": bind });
-    return (react_1.default.createElement("div", { className: cname_1.cname("control", className) },
-        react_1.default.createElement(Field, { bind: bind, rules: rules }, mota_1.binding(react_1.cloneElement(children, controlProps), model, false))));
+    var props = __assign({}, defaults.control, children.props, { "data-bind": bind });
+    var copyElement = react_1.cloneElement(children, props);
+    var element = mota_1.binding(copyElement, mota_1.useModel(model), false);
+    var content = Field ? (react_1.default.createElement(Field, { bind: bind, rules: rules }, element)) : (element);
+    return react_1.default.createElement("div", { className: cname_1.cname("control", className) }, content);
 }
 exports.Control = Control;
 
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1003,31 +1024,37 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __importStar(__webpack_require__(0));
 var cname_1 = __webpack_require__(1);
+var mota_validation_1 = __webpack_require__(8);
+function renderRequired(props) {
+    var _a = props.rules, rules = _a === void 0 ? [] : _a;
+    var required = rules &&
+        rules.length > -1 &&
+        rules.some(function (rule) { return rule.test === "required" || rule.test === mota_validation_1.tests.required; });
+    return required ? React.createElement("span", { className: cname_1.cname("required") }, "*") : null;
+}
+exports.renderRequired = renderRequired;
 function Label(props) {
     var children = props.children, className = props.className, style = props.style;
     var classNames = cname_1.cname("label", className);
-    return (React.createElement("div", { className: classNames, style: style }, children));
+    return (React.createElement("div", { className: classNames, style: style },
+        renderRequired(props),
+        children));
 }
 exports.Label = Label;
 
 
 /***/ }),
-/* 7 */
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __importStar = (this && this.__importStar) || function (mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
@@ -1039,13 +1066,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(__webpack_require__(0));
 var cname_1 = __webpack_require__(1);
 var Context_1 = __webpack_require__(2);
-var mota_validation_1 = __webpack_require__(17);
+var mota_validation_1 = __webpack_require__(8);
+var mota_1 = __webpack_require__(6);
 function Tip(props) {
-    var validation = react_1.useContext(Context_1.FormContext).validation;
-    var results = validation.results;
+    var _a = react_1.useContext(Context_1.FormContext), validation = _a.validation, model = _a.model;
+    var stateKey = validation.options && validation.options.stateKey;
+    var results = mota_1.useModel(model)[stateKey];
     var children = props.children, className = props.className, bind = props.bind, style = props.style;
-    var item = results && results.items && results.items[bind];
-    var _a = __assign({}, item), state = _a.state, message = _a.message;
+    var item = (results && results.items && results.items[bind]) || {};
+    var state = item.state, message = item.message;
     var hasError = !!(state === mota_validation_1.states.failed && message);
     var classNames = cname_1.cname({ tip: true, error: hasError }, className);
     return (react_1.default.createElement("div", { className: classNames, style: style }, hasError ? message : children));
@@ -1054,14 +1083,14 @@ exports.Tip = Tip;
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(9);
+module.exports = __webpack_require__(11);
 
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1070,23 +1099,23 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(10);
-__export(__webpack_require__(11));
+__webpack_require__(12);
+__export(__webpack_require__(13));
 __export(__webpack_require__(2));
 __export(__webpack_require__(4));
-__export(__webpack_require__(6));
 __export(__webpack_require__(7));
+__export(__webpack_require__(9));
 __export(__webpack_require__(5));
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1119,8 +1148,11 @@ var Context_1 = __webpack_require__(2);
  * @param props 表单属性
  */
 function Form(props) {
-    var children = props.children, className = props.className, context = props.context, _a = props.defaults, defaults = _a === void 0 ? {} : _a, style = props.style;
-    var contextValue = __assign({}, Form.defaults, { defaults: defaults }, context);
+    var children = props.children, className = props.className, context = props.context, style = props.style;
+    var defaults = __assign({}, Form.defaults, props.defaults);
+    var model = context.model || {};
+    var validation = context.validation || {};
+    var contextValue = { defaults: defaults, model: model, validation: validation };
     return (React.createElement(Context_1.FormContext.Provider, { value: contextValue },
         React.createElement("div", { className: cname_1.cname(null, className), style: style },
             React.createElement("div", { className: cname_1.cname("inner") }, children))));
@@ -1141,7 +1173,7 @@ Form.defaults = {};
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -1331,7 +1363,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = function isBuffer(arg) {
@@ -1342,7 +1374,7 @@ module.exports = function isBuffer(arg) {
 }
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports) {
 
 if (typeof Object.create === 'function') {
@@ -1375,7 +1407,7 @@ if (typeof Object.create === 'function') {
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1402,18 +1434,6 @@ function calcWidth(info) {
 }
 exports.calcWidth = calcWidth;
 
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_16__;
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_17__;
 
 /***/ })
 /******/ ]);

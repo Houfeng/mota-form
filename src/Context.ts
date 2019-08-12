@@ -36,12 +36,12 @@ export interface IFormContext {
   /**
    * 模型对象 (通过 moto 关联的模型对象)
    */
-  model: any;
+  model?: any;
 
   /**
    * 表单验证对象 (模块 mota-valication 中 Validation 的实例)
    */
-  validation: Validation;
+  validation?: Validation;
 
   /**
    * 表单子元素默认属性

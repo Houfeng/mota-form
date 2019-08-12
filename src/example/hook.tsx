@@ -1,26 +1,23 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { Field, Form } from "../";
 import { useModel } from "mota";
-import { useValidation } from "mota-validation";
-import { Form, Field } from "../";
+import { useValidation, states } from "mota-validation";
 
 const root = document.getElementById("root");
+const data = ((window as any).data = {
+  name: "",
+  email: "",
+  title: "",
+  comment: ""
+});
 
-function App() {
-  const model = useModel({
-    name: "Jack",
-    email: "",
-    title: "",
-    comment: ""
-  });
+function Demo() {
+  const model = useModel(data);
   const validation = useValidation(model);
+  const { state } = validation;
   return (
-    <Form
-      context={{ model, validation }}
-      defaults={{
-        field: { percent: 30 }
-      }}
-    >
+    <Form context={{ model, validation }}>
       <Field
         label="Name"
         tip="Please enter your name."
@@ -58,9 +55,19 @@ function App() {
         <textarea />
       </Field>
       <Field tip={false}>
-        <button>Submit</button>
+        <button disabled={state() !== states.success}>
+          Submit ({state()})
+        </button>
       </Field>
     </Form>
+  );
+}
+
+function App() {
+  return (
+    <div>
+      <Demo />
+    </div>
   );
 }
 

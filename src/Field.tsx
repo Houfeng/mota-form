@@ -60,37 +60,60 @@ export interface IFieldProps {
    * 验证规则列表
    */
   rules?: IRule[];
+
+  [name: string]: any;
 }
 
 export function renderTip(props: IFieldProps) {
   const { tip = "", bind } = props;
-  if (tip === false) return null;
-  return <Tip bind={bind}>{tip}</Tip>;
+  if (tip === false) return;
+  const { defaults } = useContext(FormContext);
+  const bindExpr: string = bind || props["data-bind"];
+  return (
+    <Tip {...defaults.tip} bind={bindExpr}>
+      {" "}
+      {tip}
+    </Tip>
+  );
 }
 
 export function renderLabel(props: IFieldProps) {
-  const { label } = props;
-  if (label === false) return null;
-  return <Label>{label}</Label>;
+  const { label, rules } = props;
+  if (label === false) return;
+  const { defaults } = useContext(FormContext);
+  return (
+    <Label {...defaults.label} rules={rules}>
+      {label}
+    </Label>
+  );
+}
+
+export function renderControl(props: IFieldProps) {
+  const { children, bind, rules } = props;
+  if (!children) return;
+  const bindExpr: string = bind || props["data-bind"];
+  return (
+    <Control bind={bindExpr} rules={rules}>
+      {children}
+    </Control>
+  );
 }
 
 /**
  * 表单项组件
- * @param props 表单项属性
+ * @param fieldProps 表单项属性
  */
-export function Field(props: IFieldProps) {
+export function Field(fieldProps: IFieldProps) {
   const { defaults } = useContext(FormContext);
-  const fieldProps = { ...defaults.field, ...props };
-  const { children, className, style, block, bind, rules } = fieldProps;
-  const width = calcWidth(fieldProps);
+  const props = { ...defaults.field, ...fieldProps };
+  const { className, style, block } = props;
+  const width = calcWidth(props);
   const classNames = cname({ field: true, block }, className);
   return (
     <div className={classNames} style={{ ...style, width }}>
-      {renderLabel(fieldProps)}
-      <Control bind={bind} rules={rules}>
-        {children}
-      </Control>
-      {renderTip(fieldProps)}
+      {renderLabel(props)}
+      {renderControl(props)}
+      {renderTip(props)}
     </div>
   );
 }

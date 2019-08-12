@@ -44,14 +44,16 @@ export interface IFieldProps {
      * 验证规则列表
      */
     rules?: IRule[];
+    [name: string]: any;
 }
 export declare function renderTip(props: IFieldProps): JSX.Element;
 export declare function renderLabel(props: IFieldProps): JSX.Element;
+export declare function renderControl(props: IFieldProps): JSX.Element;
 /**
  * 表单项组件
- * @param props 表单项属性
+ * @param fieldProps 表单项属性
  */
-export declare function Field(props: IFieldProps): JSX.Element;
+export declare function Field(fieldProps: IFieldProps): JSX.Element;
 /**
  * 表单项组件
  */

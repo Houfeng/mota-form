@@ -122,5 +122,11 @@
 .mota-form-error {
   color: #f5222d;
 }
+.mota-form-required {
+  color: #f5222d;
+  display: inline-block;
+  vertical-align: text-top;
+  margin-right: 2px;
+}
 
 /*# sourceMappingURL=index.css.map*/

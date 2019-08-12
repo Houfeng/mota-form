@@ -3,8 +3,13 @@ init:
 
 dev:
   - name: clean
+    target:
+      - debug
+      - dist
+      - types
   - name: typescript
   - name: webpack
+    output: ./debug/
     common:
       disabled: true
     entry: ./src/example/*.tsx
@@ -12,15 +17,21 @@ dev:
     watch: true
   - name: server
     port: 7007
+    public: ./debug
   - name: browser-sync
 
 build:
   - name: clean
+    target:
+      - dist
+      - dist
+      - types
   - name: typescript
   - name: webpack
     common:
       disabled: true
     entry: ./src/index.ts
+    output: ./dist/
     folders:
       js: ./
       css: ./

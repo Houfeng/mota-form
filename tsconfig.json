@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "outDir": "./build/",
+    "outDir": "./dist/",
+    "declarationDir": "./types/",
     "sourceMap": true,
     "declaration": true,
     "noImplicitAny": true,

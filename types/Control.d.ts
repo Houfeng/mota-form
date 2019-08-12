@@ -6,4 +6,4 @@ export interface IControlProps {
     bind?: string;
     rules?: IRule[];
 }
-export declare function Control(props: IControlProps): JSX.Element;
+export declare function Control(controlProps: IControlProps): JSX.Element;

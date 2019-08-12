@@ -2,6 +2,7 @@ import * as React from "react";
 import { cname } from "./cname";
 import { Field } from "./Field";
 import { FormContext, IDefaultProps, IFormContext } from "./Context";
+import { Validation } from "mota-validation";
 
 /**
  * 表单组件属性
@@ -38,8 +39,11 @@ export interface IFormProps {
  * @param props 表单属性
  */
 export function Form(props: IFormProps) {
-  const { children, className, context, defaults = {}, style } = props;
-  const contextValue = { ...Form.defaults, defaults, ...context };
+  const { children, className, context, style } = props;
+  const defaults = { ...Form.defaults, ...props.defaults };
+  const model = context.model || {};
+  const validation = context.validation || ({} as Validation);
+  const contextValue = { defaults, model, validation };
   return (
     <FormContext.Provider value={contextValue}>
       <div className={cname(null, className)} style={style}>
