@@ -61,6 +61,19 @@
     &>* {
       width: 100%;
       font-size: initial;
+
+      &:focus:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+        border-color: #40a9ff;
+        box-shadow: 0 0 0 @unit rgba(24, 144, 255, 0.2);
+      }
+
+      &[data-state="0"]:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+        border-color: #f5222d;
+
+        &:focus:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+          box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
+        }
+      }
     }
 
     &>input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
@@ -82,19 +95,6 @@
       -ms-appearance: none;
       -moz-appearance: none;
       appearance: none;
-
-      &:focus {
-        border-color: #40a9ff;
-        box-shadow: 0 0 0 @unit rgba(24, 144, 255, 0.2);
-      }
-
-      &[data-state="0"] {
-        border-color: #f5222d;
-
-        &:focus {
-          box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
-        }
-      }
     }
 
     &>textarea {
@@ -127,10 +127,6 @@
     font-size: @unit * 6;
     color: rgba(0, 0, 0, 0.45);
     transition: all @duration;
-
-    &[data-state="0"] {
-      color: #f5222d;
-    }
   }
 
   &-error {

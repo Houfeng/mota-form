@@ -49,6 +49,16 @@
   width: 100%;
   font-size: initial;
 }
+.mota-form-control > *:focus:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+.mota-form-control > *[data-state="0"]:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+  border-color: #f5222d;
+}
+.mota-form-control > *[data-state="0"]:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus:not([type="checkbox"]):not([type="radio"]):not([type="range"]) {
+  box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
+}
 .mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
 .mota-form-control > select,
 .mota-form-control > textarea,
@@ -68,25 +78,6 @@
   -ms-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
-.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):focus,
-.mota-form-control > select:focus,
-.mota-form-control > textarea:focus,
-.mota-form-control > button:focus {
-  border-color: #40a9ff;
-  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
-}
-.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"])[data-state="0"],
-.mota-form-control > select[data-state="0"],
-.mota-form-control > textarea[data-state="0"],
-.mota-form-control > button[data-state="0"] {
-  border-color: #f5222d;
-}
-.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"])[data-state="0"]:focus,
-.mota-form-control > select[data-state="0"]:focus,
-.mota-form-control > textarea[data-state="0"]:focus,
-.mota-form-control > button[data-state="0"]:focus {
-  box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
 }
 .mota-form-control > textarea {
   height: 64px;
@@ -115,9 +106,6 @@
   font-size: 12px;
   color: rgba(0, 0, 0, 0.45);
   transition: all 0.3s;
-}
-.mota-form-tip[data-state="0"] {
-  color: #f5222d;
 }
 .mota-form-error {
   color: #f5222d;
