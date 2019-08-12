@@ -32,6 +32,16 @@ export interface IFormProps {
    * 内联样式
    */
   style?: any;
+
+  /**
+   * 是否自动适应父容器的宽度（当为 true 将掉自动的左右边距，撑满父容器）
+   */
+  fluid?: boolean;
+
+  /**
+   * 填充
+   */
+  padding?: number;
 }
 
 /**
@@ -39,14 +49,15 @@ export interface IFormProps {
  * @param props 表单属性
  */
 export function Form(props: IFormProps) {
-  const { children, className, context, style } = props;
+  const { children, className, context = {}, style, fluid, padding } = props;
   const defaults = { ...Form.defaults, ...props.defaults };
   const model = context.model || {};
   const validation = context.validation || ({} as Validation);
   const contextValue = { defaults, model, validation };
+  const classNames = cname({ "": true, fluid }, className);
   return (
     <FormContext.Provider value={contextValue}>
-      <div className={cname(null, className)} style={style}>
+      <div className={classNames} style={{ ...style, padding }}>
         <div className={cname("inner")}>{children}</div>
       </div>
     </FormContext.Provider>

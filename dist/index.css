@@ -5,12 +5,15 @@
   margin: auto;
   border-radius: 4px;
   padding: 24px;
+  font-family: PingFang SC, Lantinghei SC, Helvetica Neue, Helvetica, Arial, Microsoft YaHei, "\5FAE\8F6F\96C5\9ED1", STHeitiSC-Light, simsun, "\5B8B\4F53", WenQuanYi Zen Hei, WenQuanYi Micro Hei, "sans-serif";
+  -webkit-font-smoothing: antialiased;
+}
+.mota-form-fluid {
+  max-width: none;
 }
 .mota-form,
 .mota-form * {
   box-sizing: border-box;
-  font-family: PingFang SC, Lantinghei SC, Helvetica Neue, Helvetica, Arial, Microsoft YaHei, "\5FAE\8F6F\96C5\9ED1", STHeitiSC-Light, simsun, "\5B8B\4F53", WenQuanYi Zen Hei, WenQuanYi Micro Hei, "sans-serif";
-  -webkit-font-smoothing: antialiased;
 }
 .mota-form-inner {
   margin: 0 -8px;

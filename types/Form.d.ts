@@ -24,6 +24,14 @@ export interface IFormProps {
      * 内联样式
      */
     style?: any;
+    /**
+     * 是否自动适应父容器的宽度（当为 true 将掉自动的左右边距，撑满父容器）
+     */
+    fluid?: boolean;
+    /**
+     * 填充
+     */
+    padding?: number;
 }
 /**
  * 表单组件

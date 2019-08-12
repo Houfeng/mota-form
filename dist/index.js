@@ -1148,13 +1148,14 @@ var Context_1 = __webpack_require__(2);
  * @param props 表单属性
  */
 function Form(props) {
-    var children = props.children, className = props.className, context = props.context, style = props.style;
+    var children = props.children, className = props.className, _a = props.context, context = _a === void 0 ? {} : _a, style = props.style, fluid = props.fluid, padding = props.padding;
     var defaults = __assign({}, Form.defaults, props.defaults);
     var model = context.model || {};
     var validation = context.validation || {};
     var contextValue = { defaults: defaults, model: model, validation: validation };
+    var classNames = cname_1.cname({ "": true, fluid: fluid }, className);
     return (React.createElement(Context_1.FormContext.Provider, { value: contextValue },
-        React.createElement("div", { className: cname_1.cname(null, className), style: style },
+        React.createElement("div", { className: classNames, style: __assign({}, style, { padding: padding }) },
             React.createElement("div", { className: cname_1.cname("inner") }, children))));
 }
 exports.Form = Form;
