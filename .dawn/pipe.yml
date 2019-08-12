@@ -5,7 +5,6 @@ dev:
   - name: clean
     target:
       - debug
-      - dist
       - types
   - name: typescript
   - name: webpack
@@ -23,7 +22,7 @@ dev:
 build:
   - name: clean
     target:
-      - dist
+      - debug
       - dist
       - types
   - name: typescript
@@ -70,6 +69,10 @@ add:
 
 test:
   - name: clean
+    target:
+      - debug
+      - dist
+      - types
   - name: tslint
   - name: unit
 
