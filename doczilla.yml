@@ -5,7 +5,7 @@ mode: static
 locales:
   - name: zh
     text: 中文 (CN)
-    title: Mota Validation
+    title: Mota Form
     groups:
       - name: guide
         text: 使用指南
