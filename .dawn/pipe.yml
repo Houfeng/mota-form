@@ -57,6 +57,7 @@ build:
         commonjs: mota-validation
         commonjs2: mota-validation
         root: MotaValidation       
+  - name: doc
 
 # build:
 #   - name: clean

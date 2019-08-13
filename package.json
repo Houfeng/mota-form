@@ -20,6 +20,7 @@
     "dn-middleware-browser-sync": "^0.1.0",
     "dn-middleware-clean": "^1.0.2",
     "dn-middleware-copy": "^0.2.6",
+    "dn-middleware-doc": "^2.1.1",
     "dn-middleware-lint": "^2.1.3",
     "dn-middleware-server": "^1.0.15",
     "dn-middleware-shell": "^1.1.0",
