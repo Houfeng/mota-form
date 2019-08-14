@@ -39,7 +39,7 @@ export interface IFormProps {
   fluid?: boolean;
 
   /**
-   * 填充
+   * 表单的整体填充边距
    */
   padding?: number;
 }
