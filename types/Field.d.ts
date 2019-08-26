@@ -48,6 +48,13 @@ export interface IFieldProps {
      * 是否显示
      */
     visible?: boolean;
+    /**
+     * 是否禁用
+     */
+    disabled?: boolean;
+    /**
+     * 其它属性
+     */
     [name: string]: any;
 }
 export declare function renderTip(props: IFieldProps): JSX.Element;

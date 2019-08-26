@@ -921,11 +921,14 @@ function renderLabel(props) {
 }
 exports.renderLabel = renderLabel;
 function renderControl(props) {
-    var children = props.children, bind = props.bind, rules = props.rules;
+    var children = props.children, bind = props.bind, rules = props.rules, disabled = props.disabled;
     if (!children)
         return;
     var bindExpr = bind || props["data-bind"];
-    return (react_1.default.createElement(Control_1.Control, { bind: bindExpr, rules: rules }, children));
+    var controlProps = { bind: bindExpr, rules: rules };
+    if ("disabled" in props)
+        controlProps.disabled = disabled;
+    return react_1.default.createElement(Control_1.Control, __assign({}, controlProps), children);
 }
 exports.renderControl = renderControl;
 /**
@@ -990,13 +993,16 @@ var mota_1 = __webpack_require__(6);
 var cname_1 = __webpack_require__(1);
 var Context_1 = __webpack_require__(2);
 function Control(controlProps) {
-    var children = controlProps.children, className = controlProps.className, bind = controlProps.bind, rules = controlProps.rules;
+    var children = controlProps.children, className = controlProps.className, bind = controlProps.bind, rules = controlProps.rules, disabled = controlProps.disabled;
     var _a = react_1.useContext(Context_1.FormContext), validation = _a.validation, model = _a.model, defaults = _a.defaults;
     var Field = validation.Field;
     var props = __assign({}, defaults.control, children.props, { "data-bind": bind });
+    if ("disabled" in controlProps && !("disabled" in children.props)) {
+        props.disabled = disabled;
+    }
     var copyElement = react_1.cloneElement(children, props);
     var element = mota_1.binding(copyElement, mota_1.useModel(model), false);
-    var content = Field ? (react_1.default.createElement(Field, { bind: bind, rules: rules }, element)) : (element);
+    var content = Field ? (react_1.default.createElement(Field, { bind: bind, rules: disabled ? null : rules }, element)) : (element);
     react_1.useEffect(function () { return function () { return validation.removeRule(bind); }; }, []);
     return react_1.default.createElement("div", { className: cname_1.cname("control", className) }, content);
 }
@@ -1149,11 +1155,13 @@ var Context_1 = __webpack_require__(2);
  * @param props 表单属性
  */
 function Form(props) {
-    var className = props.className, visible = props.visible, style = props.style, fluid = props.fluid, padding = props.padding;
+    var className = props.className, visible = props.visible, style = props.style, fluid = props.fluid, padding = props.padding, disabled = props.disabled;
     if (visible === false)
         return React.createElement("span", null);
     var children = props.children, _a = props.context, context = _a === void 0 ? {} : _a;
     var defaults = __assign({}, Form.defaults, props.defaults);
+    if ("disabled" in props)
+        defaults.field = __assign({}, defaults.field, { disabled: disabled });
     var model = context.model || {};
     var validation = context.validation || {};
     var contextValue = { defaults: defaults, model: model, validation: validation };

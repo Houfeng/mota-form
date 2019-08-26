@@ -82,6 +82,12 @@
   -moz-appearance: none;
   appearance: none;
 }
+.mota-form-control > input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):disabled,
+.mota-form-control > select:disabled,
+.mota-form-control > textarea:disabled,
+.mota-form-control > button:disabled {
+  background: #f8f8f8;
+}
 .mota-form-control > textarea {
   height: 64px;
   line-height: 1.5;

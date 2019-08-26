@@ -5,5 +5,6 @@ export interface IControlProps {
     children?: React.ReactElement;
     bind?: string;
     rules?: IRule[];
+    disabled?: boolean;
 }
 export declare function Control(controlProps: IControlProps): JSX.Element;

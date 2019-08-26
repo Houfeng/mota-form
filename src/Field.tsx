@@ -66,6 +66,14 @@ export interface IFieldProps {
    */
   visible?: boolean;
 
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean;
+
+  /**
+   * 其它属性
+   */
   [name: string]: any;
 }
 
@@ -93,14 +101,12 @@ export function renderLabel(props: IFieldProps) {
 }
 
 export function renderControl(props: IFieldProps) {
-  const { children, bind, rules } = props;
+  const { children, bind, rules, disabled } = props;
   if (!children) return;
   const bindExpr: string = bind || props["data-bind"];
-  return (
-    <Control bind={bindExpr} rules={rules}>
-      {children}
-    </Control>
-  );
+  const controlProps: any = { bind: bindExpr, rules };
+  if ("disabled" in props) controlProps.disabled = disabled;
+  return <Control {...controlProps}>{children}</Control>;
 }
 
 /**

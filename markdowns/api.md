@@ -50,6 +50,16 @@ export interface IFormProps {
    * 表单的整体填充边距
    */
   padding?: number;
+
+  /**
+   * 是否显示
+   */
+  visible?: boolean;
+
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean;
 }
 ```
 
@@ -155,5 +165,16 @@ export interface IFieldProps {
    * 验证规则列表
    */
   rules?: IRule[];
+
+  /**
+   * 是否显示
+   */
+  visible?: boolean;
+
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean;
+
 }
 ```

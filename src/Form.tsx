@@ -47,6 +47,11 @@ export interface IFormProps {
    * 是否显示
    */
   visible?: boolean;
+
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean;
 }
 
 /**
@@ -54,10 +59,11 @@ export interface IFormProps {
  * @param props 表单属性
  */
 export function Form(props: IFormProps) {
-  const { className, visible, style, fluid, padding } = props;
+  const { className, visible, style, fluid, padding, disabled } = props;
   if (visible === false) return <span />;
   const { children, context = {} } = props;
   const defaults = { ...Form.defaults, ...props.defaults };
+  if ("disabled" in props) defaults.field = { ...defaults.field, disabled };
   const model = context.model || {};
   const validation = context.validation || ({} as Validation);
   const contextValue = { defaults, model, validation };
