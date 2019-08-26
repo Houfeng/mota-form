@@ -44,6 +44,10 @@ export interface IFieldProps {
      * 验证规则列表
      */
     rules?: IRule[];
+    /**
+     * 是否显示
+     */
+    visible?: boolean;
     [name: string]: any;
 }
 export declare function renderTip(props: IFieldProps): JSX.Element;

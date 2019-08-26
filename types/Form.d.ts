@@ -32,6 +32,10 @@ export interface IFormProps {
      * 表单的整体填充边距
      */
     padding?: number;
+    /**
+     * 是否显示
+     */
+    visible?: boolean;
 }
 /**
  * 表单组件

@@ -42,6 +42,11 @@ export interface IFormProps {
    * 表单的整体填充边距
    */
   padding?: number;
+
+  /**
+   * 是否显示
+   */
+  visible?: boolean;
 }
 
 /**
@@ -49,7 +54,9 @@ export interface IFormProps {
  * @param props 表单属性
  */
 export function Form(props: IFormProps) {
-  const { children, className, context = {}, style, fluid, padding } = props;
+  const { className, visible, style, fluid, padding } = props;
+  if (visible === false) return <span />;
+  const { children, context = {} } = props;
   const defaults = { ...Form.defaults, ...props.defaults };
   const model = context.model || {};
   const validation = context.validation || ({} as Validation);

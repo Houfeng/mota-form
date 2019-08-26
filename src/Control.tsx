@@ -1,4 +1,4 @@
-import React, { cloneElement, useContext } from "react";
+import React, { cloneElement, useContext, useEffect } from "react";
 import { binding, useModel } from "mota";
 import { cname } from "./cname";
 import { FormContext } from "./Context";
@@ -25,5 +25,6 @@ export function Control(controlProps: IControlProps) {
   ) : (
     element
   );
+  useEffect(() => () => validation.removeRule(bind), []);
   return <div className={cname("control", className)}>{content}</div>;
 }

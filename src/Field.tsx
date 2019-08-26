@@ -61,6 +61,11 @@ export interface IFieldProps {
    */
   rules?: IRule[];
 
+  /**
+   * 是否显示
+   */
+  visible?: boolean;
+
   [name: string]: any;
 }
 
@@ -71,7 +76,6 @@ export function renderTip(props: IFieldProps) {
   const bindExpr: string = bind || props["data-bind"];
   return (
     <Tip {...defaults.tip} bind={bindExpr}>
-      {" "}
       {tip}
     </Tip>
   );
@@ -106,7 +110,8 @@ export function renderControl(props: IFieldProps) {
 export function Field(fieldProps: IFieldProps) {
   const { defaults } = useContext(FormContext);
   const props = { ...defaults.field, ...fieldProps };
-  const { className, style, block } = props;
+  const { className, visible, style, block } = props;
+  if (visible === false) return <span />;
   const width = calcWidth(props);
   const classNames = cname({ field: true, block }, className);
   return (

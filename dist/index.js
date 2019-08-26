@@ -909,9 +909,7 @@ function renderTip(props) {
         return;
     var defaults = react_1.useContext(Context_1.FormContext).defaults;
     var bindExpr = bind || props["data-bind"];
-    return (react_1.default.createElement(Tip_1.Tip, __assign({}, defaults.tip, { bind: bindExpr }),
-        " ",
-        tip));
+    return (react_1.default.createElement(Tip_1.Tip, __assign({}, defaults.tip, { bind: bindExpr }), tip));
 }
 exports.renderTip = renderTip;
 function renderLabel(props) {
@@ -937,7 +935,9 @@ exports.renderControl = renderControl;
 function Field(fieldProps) {
     var defaults = react_1.useContext(Context_1.FormContext).defaults;
     var props = __assign({}, defaults.field, fieldProps);
-    var className = props.className, style = props.style, block = props.block;
+    var className = props.className, visible = props.visible, style = props.style, block = props.block;
+    if (visible === false)
+        return react_1.default.createElement("span", null);
     var width = utils_1.calcWidth(props);
     var classNames = cname_1.cname({ field: true, block: block }, className);
     return (react_1.default.createElement("div", { className: classNames, style: __assign({}, style, { width: width }) },
@@ -997,6 +997,7 @@ function Control(controlProps) {
     var copyElement = react_1.cloneElement(children, props);
     var element = mota_1.binding(copyElement, mota_1.useModel(model), false);
     var content = Field ? (react_1.default.createElement(Field, { bind: bind, rules: rules }, element)) : (element);
+    react_1.useEffect(function () { return function () { return validation.removeRule(bind); }; }, []);
     return react_1.default.createElement("div", { className: cname_1.cname("control", className) }, content);
 }
 exports.Control = Control;
@@ -1148,7 +1149,10 @@ var Context_1 = __webpack_require__(2);
  * @param props 表单属性
  */
 function Form(props) {
-    var children = props.children, className = props.className, _a = props.context, context = _a === void 0 ? {} : _a, style = props.style, fluid = props.fluid, padding = props.padding;
+    var className = props.className, visible = props.visible, style = props.style, fluid = props.fluid, padding = props.padding;
+    if (visible === false)
+        return React.createElement("span", null);
+    var children = props.children, _a = props.context, context = _a === void 0 ? {} : _a;
     var defaults = __assign({}, Form.defaults, props.defaults);
     var model = context.model || {};
     var validation = context.validation || {};
