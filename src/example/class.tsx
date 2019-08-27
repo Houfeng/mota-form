@@ -35,6 +35,7 @@ class Demo extends React.Component {
           label="Email"
           tip="Please enter your email."
           bind="email"
+          disabled={this.model.name === "1"}
           rules={[{ test: "required" }, { test: "email" }]}
           percent={50}
         >
