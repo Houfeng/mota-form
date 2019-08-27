@@ -1003,7 +1003,7 @@ function Control(controlProps) {
     var copyElement = react_1.cloneElement(children, props);
     var element = mota_1.binding(copyElement, mota_1.useModel(model), false);
     var content = Field ? (react_1.default.createElement(Field, { bind: bind, rules: disabled ? null : rules }, element)) : (element);
-    react_1.useEffect(function () { return function () { return validation.removeRule(bind); }; }, []);
+    react_1.useEffect(function () { return function () { return validation.removeRule && validation.removeRule(bind); }; }, []);
     return react_1.default.createElement("div", { className: cname_1.cname("control", className) }, content);
 }
 exports.Control = Control;

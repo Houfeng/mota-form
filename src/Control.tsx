@@ -29,6 +29,9 @@ export function Control(controlProps: IControlProps) {
   ) : (
     element
   );
-  useEffect(() => () => validation.removeRule(bind), []);
+  useEffect(
+    () => () => validation.removeRule && validation.removeRule(bind),
+    []
+  );
   return <div className={cname("control", className)}>{content}</div>;
 }
