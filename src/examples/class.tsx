@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Field, Form } from "../";
 import { model } from "mota";
 import { validation, Validation, states } from "mota-validation";
+import { Field, Form } from "../";
 
 const root = document.getElementById("root");
 const data = ((window as any).data = {
