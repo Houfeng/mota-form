@@ -16,6 +16,12 @@ function Demo() {
   const model = useModel(data);
   const validation = useValidation(model);
   const { state } = validation;
+  // submit handler
+  const sumbit = React.useCallback(async () => {
+    const result = await validation.test();
+    if (result !== states.success) return;
+    console.log("data", data);
+  }, []);
   return (
     <Form context={{ model, validation }}>
       <Field
@@ -55,7 +61,7 @@ function Demo() {
         <textarea />
       </Field>
       <Field tip={false}>
-        <button disabled={state() !== states.success}>
+        <button disabled={state() !== states.success} onClick={sumbit}>
           Submit ({state()})
         </button>
       </Field>

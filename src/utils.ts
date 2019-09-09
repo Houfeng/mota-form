@@ -1,9 +1,5 @@
-import { isString, isNumber } from "util";
-
-export interface IWidthInfo {
-  percent?: number;
-  width?: number | string;
-}
+import { isNullOrUndefined, isNumber, isString } from "util";
+import { IWidthInfo } from "./IWidthInfo";
 
 export function safePercent(percent: number) {
   if (percent < 0) return 0;
@@ -12,9 +8,14 @@ export function safePercent(percent: number) {
 }
 
 export function calcWidth(info: IWidthInfo) {
-  const { width, percent } = info;
-  if (isNumber(width)) return width + "px";
-  if (isString(width)) return width;
-  if (isNumber(percent)) return safePercent(percent) + "%";
-  return undefined;
+  const { width, percent, subtract } = info;
+  let result = "";
+  if (isNumber(width)) result = width + "px";
+  else if (isString(width)) result = width;
+  else if (isNumber(percent)) result = safePercent(percent) + "%";
+  else return undefined;
+  if (!isNullOrUndefined(subtract) && !isNullOrUndefined(result)) {
+    result = `calc(${result} - ${subtract}${isNumber(subtract) ? "px" : ""})`;
+  }
+  return result || undefined;
 }

@@ -11,7 +11,7 @@ dev:
     output: ./debug/
     common:
       disabled: true
-    entry: ./src/example/*.tsx
+    entry: ./src/examples/*.tsx
     template: ./assets/*.html
     watch: true
   - name: server

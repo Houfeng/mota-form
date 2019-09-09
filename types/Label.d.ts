@@ -3,7 +3,7 @@ import { IRule } from "mota-validation";
 export interface ILabelProps {
     className?: string;
     children?: React.ReactNode;
-    style?: any;
+    style?: React.CSSProperties;
     rules?: IRule[];
 }
 export declare function renderRequired(props: ILabelProps): JSX.Element;

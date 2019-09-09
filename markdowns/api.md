@@ -147,6 +147,11 @@ export interface IFieldProps {
   width?: number | string;
 
   /**
+   * 在 percent 或 width 的基础上减去的宽度
+   */
+  subtract?: number | string;
+
+  /**
    * 样式
    */
   style?: any;

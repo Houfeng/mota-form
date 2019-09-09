@@ -18,6 +18,13 @@ class Demo extends React.Component {
   model: any;
   validation: Validation;
 
+  // submit handler
+  sumbit = async () => {
+    const result = await this.validation.test();
+    if (result !== states.success) return;
+    console.log("data", this.model);
+  };
+
   render() {
     const { state } = this.validation;
     return (
@@ -60,7 +67,7 @@ class Demo extends React.Component {
           <textarea />
         </Field>
         <Field tip={false}>
-          <button disabled={state() !== states.success}>
+          <button disabled={state() !== states.success} onClick={this.sumbit}>
             Submit ({state()})
           </button>
         </Field>

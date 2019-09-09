@@ -1436,14 +1436,20 @@ function safePercent(percent) {
 }
 exports.safePercent = safePercent;
 function calcWidth(info) {
-    var width = info.width, percent = info.percent;
+    var width = info.width, percent = info.percent, subtract = info.subtract;
+    var result = "";
     if (util_1.isNumber(width))
-        return width + "px";
-    if (util_1.isString(width))
-        return width;
-    if (util_1.isNumber(percent))
-        return safePercent(percent) + "%";
-    return undefined;
+        result = width + "px";
+    else if (util_1.isString(width))
+        result = width;
+    else if (util_1.isNumber(percent))
+        result = safePercent(percent) + "%";
+    else
+        return undefined;
+    if (!util_1.isNullOrUndefined(subtract) && !util_1.isNullOrUndefined(result)) {
+        result = "calc(" + result + " - " + subtract + (util_1.isNumber(subtract) ? "px" : "") + ")";
+    }
+    return result || undefined;
 }
 exports.calcWidth = calcWidth;
 

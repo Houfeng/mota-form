@@ -4,10 +4,11 @@ import { cname } from "./cname";
 import { Control } from "./Control";
 import { FormContext } from "./Context";
 import { IRule } from "mota-validation";
+import { IWidthInfo } from "./IWidthInfo";
 import { Label } from "./Label";
 import { Tip } from "./Tip";
 
-export interface IFieldProps {
+export interface IFieldProps extends IWidthInfo {
   /**
    * 样式类名
    */
@@ -32,19 +33,9 @@ export interface IFieldProps {
   children?: React.ReactElement;
 
   /**
-   * 宽度百分比 (0~100)
-   */
-  percent?: number;
-
-  /**
-   * 宽度，当为 number 时单位为 px
-   */
-  width?: number | string;
-
-  /**
    * 样式
    */
-  style?: any;
+  style?: React.CSSProperties;
 
   /**
    * 是否独占一行 (无论宽度多少，都将独占一行)

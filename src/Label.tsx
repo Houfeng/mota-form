@@ -5,7 +5,7 @@ import { IRule, tests } from "mota-validation";
 export interface ILabelProps {
   className?: string;
   children?: React.ReactNode;
-  style?: any;
+  style?: React.CSSProperties;
   rules?: IRule[];
 }
 

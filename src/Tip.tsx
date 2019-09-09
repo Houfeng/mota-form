@@ -8,7 +8,7 @@ export interface ITipProps {
   className?: string;
   children?: React.ReactNode;
   bind?: string;
-  style?: any;
+  style?: React.CSSProperties;
 }
 
 export function Tip(props: ITipProps) {

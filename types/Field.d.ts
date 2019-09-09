@@ -1,6 +1,7 @@
 import React from "react";
 import { IRule } from "mota-validation";
-export interface IFieldProps {
+import { IWidthInfo } from "./IWidthInfo";
+export interface IFieldProps extends IWidthInfo {
     /**
      * 样式类名
      */
@@ -21,17 +22,9 @@ export interface IFieldProps {
      */
     children?: React.ReactElement;
     /**
-     * 宽度百分比 (0~100)
-     */
-    percent?: number;
-    /**
-     * 宽度，当为 number 时单位为 px
-     */
-    width?: number | string;
-    /**
      * 样式
      */
-    style?: any;
+    style?: React.CSSProperties;
     /**
      * 是否独占一行 (无论宽度多少，都将独占一行)
      */
