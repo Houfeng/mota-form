@@ -937,13 +937,13 @@ exports.renderControl = renderControl;
  */
 function Field(fieldProps) {
     var defaults = react_1.useContext(Context_1.FormContext).defaults;
-    var props = __assign({}, defaults.field, fieldProps);
+    var props = __assign(__assign({}, defaults.field), fieldProps);
     var className = props.className, visible = props.visible, style = props.style, block = props.block;
     if (visible === false)
         return react_1.default.createElement("span", null);
     var width = utils_1.calcWidth(props);
     var classNames = cname_1.cname({ field: true, block: block }, className);
-    return (react_1.default.createElement("div", { className: classNames, style: __assign({}, style, { width: width }) },
+    return (react_1.default.createElement("div", { className: classNames, style: __assign(__assign({}, style), { width: width }) },
         renderLabel(props),
         renderControl(props),
         renderTip(props)));
@@ -996,7 +996,7 @@ function Control(controlProps) {
     var children = controlProps.children, className = controlProps.className, bind = controlProps.bind, rules = controlProps.rules, disabled = controlProps.disabled;
     var _a = react_1.useContext(Context_1.FormContext), validation = _a.validation, model = _a.model, defaults = _a.defaults;
     var Field = validation.Field;
-    var props = __assign({}, defaults.control, children.props, { "data-bind": bind });
+    var props = __assign(__assign(__assign({}, defaults.control), children.props), { "data-bind": bind });
     if ("disabled" in controlProps && !("disabled" in children.props)) {
         props.disabled = disabled;
     }
@@ -1159,15 +1159,15 @@ function Form(props) {
     if (visible === false)
         return React.createElement("span", null);
     var children = props.children, _a = props.context, context = _a === void 0 ? {} : _a;
-    var defaults = __assign({}, Form.defaults, props.defaults);
+    var defaults = __assign(__assign({}, Form.defaults), props.defaults);
     if ("disabled" in props)
-        defaults.field = __assign({}, defaults.field, { disabled: disabled });
+        defaults.field = __assign(__assign({}, defaults.field), { disabled: disabled });
     var model = context.model || {};
     var validation = context.validation || {};
     var contextValue = { defaults: defaults, model: model, validation: validation };
     var classNames = cname_1.cname({ "": true, fluid: fluid }, className);
     return (React.createElement(Context_1.FormContext.Provider, { value: contextValue },
-        React.createElement("div", { className: classNames, style: __assign({}, style, { padding: padding }) },
+        React.createElement("div", { className: classNames, style: __assign(__assign({}, style), { padding: padding }) },
             React.createElement("div", { className: cname_1.cname("inner") }, children))));
 }
 exports.Form = Form;
