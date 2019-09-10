@@ -107,6 +107,8 @@ class Demo extends React.Component {
 }
 ```
 
+<iframe src="https://codesandbox.io/embed/mota-form-example-class-13hvd?fontsize=14&hidenavigation=1&view=preview" title="mota-form-example-class" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+
 ### 在 function 组件中使用
 
 ```tsx
@@ -173,3 +175,5 @@ function Demo() {
   );
 }
 ```
+
+<iframe src="https://codesandbox.io/embed/mota-form-example-hook-j0mtq?fontsize=14&hidenavigation=1&view=preview" title="mota-form-example-hook" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
